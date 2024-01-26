@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:fragment="seller-header">
+  <div class="home-bar">
+    <div>
+      <a class="home-link" th:href="@{/seller/add-product}">Dodaj produkt</a>
+    </div>
+    <div>
+      <a class="home-link" th:href="@{/seller/create-order}">Złóż zamówienie</a>
+    </div>
+    <div>
+      <a class="home-link" th:href="@{/seller/view-orders}">Lista zamówień</a>
+    </div>
+    <div>
+      <a class="home-link" th:href="@{/home-page}">Wyloguj</a>
+    </div>
+  </div>
+</header>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Lista zamówień</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/> <!-- Dodanie linku do stylu CSS -->
+</head>
+<body>
+
+<header th:replace="~{fragments/basic-header :: basic-header}"></header>
+<div class="layout">
+<h2>Lista zamówień</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Numer zamówienia</th>
+    <th>Dane wysyłkowe</th>
+    <th>Metoda płatności</th>
+    <th>Numer przewozowy</th>
+    <th>Produkty</th>
+    <th>Status</th>
+    <th>Zmień status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="displayOrder : ${displayOrders}">
+    <td th:text="${displayOrder.order.id}"></td>
+    <td>
+      <li th:text="${displayOrder.order.firstName}"></li>
+      <li th:text="${displayOrder.order.lastName}"></li>
+      <li th:text="${displayOrder.order.phoneNumber}">
+      <li th:text="${displayOrder.order.address}"></li>
+      <li th:text="${displayOrder.order.postCode}"></li>
+      <li th:text="${displayOrder.order.city}"></li>
+    </td>
+    <td th:text="${displayOrder.order.paymentMethod}"></td>
+    <td th:text="${displayOrder.order.waybillNumber}"></td>
+    <td>
+      <ul>
+        <li th:each="productDetails : ${displayOrder.productDetails}">
+          <span th:text="${productDetails.product.name}"></span> -
+          <span th:text="${productDetails.quantity}"></span> szt. x
+          <span th:text="${productDetails.product.price}"></span> zl
+        </li>
+      </ul>
+    </td>
+    <td th:text="${displayOrder.order.status}"></td>
+    <td>
+      <form th:action="@{'/edit-order-status/' + ${displayOrder.order.id}}" method="post">
+        <select name="newStatus">
+          <option value="NOWE">NOWE</option>
+          <option value="W TRAKCIE REALIZACJI">W TRAKCIE REALIZACJI</option>
+          <option value="DO WYSYLKI">DO WYSYŁKI</option>
+          <option value="WYSLANE">WYSŁANE</option>
+          <option value="ZAKONCZONE">ZAKOŃCZONE</option>
+          <option value="PRZYJETO ZWROT">PRZYJĘTO ZWROT</option>
+          <option value="ZWROCONO WPŁATE">ZWRÓCONO WPŁATĘ</option>
+          <option value="ANULOWANE">ANULOWANE</option>
+        </select>
+        <button type="submit">Zmień status</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</div>
+</body>
+</html>

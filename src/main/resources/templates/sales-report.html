@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Raport sprzedaży</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/> <!-- Dodanie linku do stylu CSS -->
+</head>
+<body>
+
+<header th:replace="~{fragments/owner-header :: owner-header}"></header>
+<div class="layout">
+<h2>Raport sprzedazy</h2>
+
+  <form>
+    <div>
+      <label>Od kiedy:</label>
+      <input type="date" required>
+    </div>
+    <div>
+      <label>Do kiedy:</label>
+      <input type="date"  required>
+    </div>
+    <div>
+      <label>Typ raportu:</label>
+      <input type="text" name="address" required>
+    </div>
+    <button type="submit">Wygeneruj raport</button>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Home Page</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="layout">
+  <h1>System wspomagania dystrybutora instalacji nawodnieniowych</h1>
+
+  <h2>Podaj swój identyfikator i rolę</h2>
+
+  <form th:action="@{/home-page}" method="post">
+    <div>
+      <label for="role">Podaj identyfikator:</label>
+      <input type="text" required>
+    </div>
+    <div>
+      <label for="role">Wybierz rolę:</label>
+      <select id="role" name="role" required>
+        <option value="SPRZEDAWCA">Sprzedawca</option>
+        <option value="WLASCICIEL">Właściciel</option>
+        <option value="KURIER">Kurier</option>
+        <option value="PAKOWACZ">Pakowacz</option>
+        <option value="ADMINISTRATOR">Administrator</option>
+      </select>
+    </div>
+
+    <br/>
+    <button type="submit">Zaloguj</button>
+  </form>
+  <p>&copy SWP</p>
+</div>
+
+
+</body>
+</html>

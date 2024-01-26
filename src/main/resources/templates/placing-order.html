@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Składanie zamówienia</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/> <!-- Dodanie linku do stylu CSS -->
+</head>
+<body>
+
+<header th:replace="~{fragments/seller-header :: seller-header}"></header>
+<div class="layout">
+<h2>Składanie nowego zamówienia</h2>
+
+<form th:action="@{/seller/create-order}" method="post">
+    <div>
+        <label>Imię:</label>
+        <input type="text" name="firstName" required>
+    </div>
+    <div>
+        <label>Nazwisko:</label>
+        <input type="text" name="lastName" required>
+    </div>
+    <div>
+        <label>Numer telefonu:</label>
+        <input type="tel" name="phoneNumber" required>
+    </div>
+    <div>
+        <label>Ulica:</label>
+        <input type="text" name="address" required>
+    </div>
+    <div>
+        <label>Kod pocztowy:</label>
+        <input type="text" name="postCode" required>
+    </div>
+    <div>
+        <label>Miasto:</label>
+        <input type="text" name="city" required>
+    </div>
+    <div>
+        <label>Metoda płatności:</label>
+        <select name="paymentMethod" required>
+            <option value="PŁATNOSC Z GORY">PŁATNOŚĆ Z GÓRY</option>
+            <option value="PŁATNOSC PRZY ODBIORZE">PŁATNOŚĆ PRZY ODBIORZE</option>
+        </select>
+    </div>
+    <div>
+        <label>Status:</label>
+        <select name="status" required>
+            <option value="NOWE">NOWE</option>
+            <option value="OPŁACONE">DO WYSYŁKI</option>
+            <option value="W REALIZACJI">W REALIZACJI</option>
+            <option value="DO WYSYLKI">DO WYSYŁKI</option>
+            <option value="WYSLANE">WYSŁANE</option>
+            <option value="PRZYJETO ZWROT">PRZYJĘTO ZWROT</option>
+            <option value="ZWROCONO WPŁATE">ZWRÓCONO WPŁATĘ</option>
+            <option value="ZAKONCZONE">ZAKOŃCZONE</option>
+        </select>
+    </div>
+    <div>
+        <label>Numer przewozowy:</label>
+        <input type="text" name="waybillNumber" required>
+    </div>
+
+    <div>
+        <label>Wybierz produkty:</label>
+        <table>
+            <thead>
+            <tr>
+                <th>Nazwa produktu</th>
+                <th>Cena</th>
+                <th>Ilość</th>
+                <th>Wybór</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+                <td><input type="number" name="quantities" value="1" min="1"></td>
+                <td><input type="checkbox" name="selectedProducts" th:value="${product.id}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit">Złóż zamówienie</button>
+</form>
+</div>
+</body>
+</html>
